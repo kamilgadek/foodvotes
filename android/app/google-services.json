@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "236980176738",
+    "project_id": "pizza-rybnik-999",
+    "storage_bucket": "pizza-rybnik-999.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236980176738:android:a9d457c68b2df88c648e3b",
+        "android_client_info": {
+          "package_name": "com.patrykbarszczewski.najlepsza_pizza_w_miescie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "236980176738-eji951in1b4hfhc3t75d9qte52ppdg6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCC3iMikw7YZy8csNvSMjKhj0WVQ32TZK0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "236980176738-eji951in1b4hfhc3t75d9qte52ppdg6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
