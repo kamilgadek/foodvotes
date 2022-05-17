@@ -39,11 +39,15 @@ class RootPage extends StatelessWidget {
           if (user == null) {
             return const Scaffold(
               body: Center(
-                child: Text('data'),
+                child: Text('Jesteś niezalogowany'),
               ),
             );
           }
-          return const Scaffold();
+          return Scaffold(
+            body: Center(
+              child: Text('Jesteś zalogowany jako ${user.email}'),
+            ),
+          );
         });
   }
 }
