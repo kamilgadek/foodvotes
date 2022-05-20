@@ -1,13 +1,20 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   LoginPage({
     Key? key,
   }) : super(key: key);
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +28,17 @@ class LoginPage extends StatelessWidget {
               const Text('Zaloguj się'),
               TextField(
                 decoration: const InputDecoration(hintText: 'Login'),
-                controller: emailController,
+                controller: widget.emailController,
               ),
               TextField(
                 decoration: const InputDecoration(hintText: 'Hasło'),
-                controller: passwordController,
+                controller: widget.passwordController,
                 obscureText: true,
               ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(errorMessage),
               const SizedBox(
                 height: 20,
               ),
@@ -35,11 +46,13 @@ class LoginPage extends StatelessWidget {
                 onPressed: () async {
                   try {
                     await FirebaseAuth.instance.signInWithEmailAndPassword(
-                      email: emailController.text,
-                      password: passwordController.text,
+                      email: widget.emailController.text,
+                      password: widget.passwordController.text,
                     );
                   } catch (error) {
-                    print(error);
+                    setState(() {
+                      errorMessage = error.toString();
+                    });
                   }
                 },
                 child: const Text('Zaloguj się'),
