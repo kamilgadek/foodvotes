@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'add_opinion/add_opinion_page_content.dart';
+import 'my_account/my_acconut_page_content.dart';
+import 'restaurants/restaurants_page_content.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -19,23 +22,20 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Najlepsza Pizza Rybnik'),
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Builder(builder: (context) {
             if (currentIdex == 0) {
-              return Center(
-                child: Text('Jeden'),
-              );
+              return const RestaurantsPageContent();
             }
             if (currentIdex == 1) {
-              return Center(
-                child: Text('Dwa'),
-              );
+              return const AddOpinionPageContent();
             }
-            return Center(
-              child: Text('Jesteś zalogowany jako ${widget.user.email}'),
-            );
+            return MyAccountPageContent(email: widget.user.email);
           }),
           const SizedBox(
             height: 20,
