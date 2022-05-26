@@ -14,7 +14,7 @@ class RestaurantsPageContent extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Center(
-              child: Text('Something went wrong'),
+              child: Text('Coś poszło nie tak!'),
             );
           }
 

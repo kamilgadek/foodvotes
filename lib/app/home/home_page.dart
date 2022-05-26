@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Najlepsza Pizza Rybnik'),
+        title: const Text('Najlepsza Pizza w Rybniku'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
