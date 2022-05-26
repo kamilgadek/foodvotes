@@ -10,6 +10,7 @@ class AddOpinionPageContent extends StatefulWidget {
   State<AddOpinionPageContent> createState() => _AddOpinionPageContentState();
 }
 
+var rating = 3.0;
 var restaurantName = '';
 var pizzaName = '';
 
@@ -37,12 +38,24 @@ class _AddOpinionPageContentState extends State<AddOpinionPageContent> {
               });
             },
           ),
+          Slider(
+            onChanged: (newValue) {
+              setState(() {
+                rating = newValue;
+              });
+            },
+            value: rating,
+            min: 1.0,
+            max: 6.0,
+            divisions: 10,
+            label: rating.toString(),
+          ),
           ElevatedButton(
               onPressed: () {
                 FirebaseFirestore.instance.collection('restaurants').add({
                   'name': restaurantName,
                   'pizza': pizzaName,
-                  'rating': 3.0
+                  'rating': rating,
                 });
               },
               child: const Text('Dodaj'))
