@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "236980176738",
-    "project_id": "pizza-rybnik-999",
-    "storage_bucket": "pizza-rybnik-999.appspot.com"
+    "project_number": "6586098523",
+    "project_id": "najlepszapizzawmiescier",
+    "storage_bucket": "najlepszapizzawmiescier.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:236980176738:android:a9d457c68b2df88c648e3b",
+        "mobilesdk_app_id": "1:6586098523:android:a96bfe15b0b6f22c54b07e",
         "android_client_info": {
           "package_name": "com.patrykbarszczewski.najlepsza_pizza_w_miescie"
         }
       },
       "oauth_client": [
         {
-          "client_id": "236980176738-eji951in1b4hfhc3t75d9qte52ppdg6n.apps.googleusercontent.com",
+          "client_id": "6586098523-0djnl3q6ssampj8pot4sn3kqq104vmoi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCC3iMikw7YZy8csNvSMjKhj0WVQ32TZK0"
+          "current_key": "AIzaSyDSDwpvVemXzvBnFFJLE0o4Qi01Bk6H9gI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "236980176738-eji951in1b4hfhc3t75d9qte52ppdg6n.apps.googleusercontent.com",
+              "client_id": "6586098523-0djnl3q6ssampj8pot4sn3kqq104vmoi.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "236980176738-cm1qjn7tpuqm37f9538cmgv4dafo3fpa.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.patrykbarszczewski.najlepszaPizzaWMiescie"
-              }
             }
           ]
         }

@@ -32,6 +32,16 @@ class DefaultFirebaseOptions {
           'DefaultFirebaseOptions have not been configured for macos - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
+      case TargetPlatform.windows:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for windows - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+      case TargetPlatform.linux:
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for linux - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       default:
         throw UnsupportedError(
           'DefaultFirebaseOptions are not supported for this platform.',
@@ -40,20 +50,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCC3iMikw7YZy8csNvSMjKhj0WVQ32TZK0',
-    appId: '1:236980176738:android:a9d457c68b2df88c648e3b',
-    messagingSenderId: '236980176738',
-    projectId: 'pizza-rybnik-999',
-    storageBucket: 'pizza-rybnik-999.appspot.com',
+    apiKey: 'AIzaSyDSDwpvVemXzvBnFFJLE0o4Qi01Bk6H9gI',
+    appId: '1:6586098523:android:a96bfe15b0b6f22c54b07e',
+    messagingSenderId: '6586098523',
+    projectId: 'najlepszapizzawmiescier',
+    storageBucket: 'najlepszapizzawmiescier.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBOZXc9MRY2Fvb6SNh88COYub8KMJ_q1Z8',
-    appId: '1:236980176738:ios:13dc1208448db937648e3b',
-    messagingSenderId: '236980176738',
-    projectId: 'pizza-rybnik-999',
-    storageBucket: 'pizza-rybnik-999.appspot.com',
-    iosClientId: '236980176738-cm1qjn7tpuqm37f9538cmgv4dafo3fpa.apps.googleusercontent.com',
+    apiKey: 'AIzaSyCEZJ1gSelMvCXgopHWAWuYgF8ry_WRuEg',
+    appId: '1:6586098523:ios:c3ae19ea005f5c8e54b07e',
+    messagingSenderId: '6586098523',
+    projectId: 'najlepszapizzawmiescier',
+    storageBucket: 'najlepszapizzawmiescier.appspot.com',
+    iosClientId: '6586098523-h13vnm3fr21u6qrub38f76q2cdcg7dli.apps.googleusercontent.com',
     iosBundleId: 'com.patrykbarszczewski.najlepszaPizzaWMiescie',
   );
 }

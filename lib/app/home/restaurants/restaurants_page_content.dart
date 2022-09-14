@@ -25,13 +25,13 @@ class RestaurantsPageContent extends StatelessWidget {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: Text("Loading"),
+              child: Text("Ładowanie danych"),
             );
           }
 
           final documents = snapshot.data!.docs;
 
-          return ListView(
+          return Column(
             children: [
               for (final document in documents) ...[
                 Padding(
@@ -43,6 +43,9 @@ class RestaurantsPageContent extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(document['name']),
+                          const SizedBox(
+                            height: 10,
+                          ),
                           Text(document['pizza']),
                         ],
                       ),
