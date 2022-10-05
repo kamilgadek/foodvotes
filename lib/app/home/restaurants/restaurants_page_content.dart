@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'cubit/restaurants_cubit.dart';
 
 class RestaurantsPageContent extends StatelessWidget {
   const RestaurantsPageContent({
@@ -8,28 +10,23 @@ class RestaurantsPageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-        stream: FirebaseFirestore.instance
-            .collection('restaurants')
-            .orderBy(
-              'rating',
-              descending: true,
-            )
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Center(
-              child: Text('Coś poszło nie tak!'),
+    return BlocProvider(
+      create: (context) => RestaurantsCubit()..start(),
+      child: BlocBuilder<RestaurantsCubit, RestaurantsState>(
+        builder: (context, state) {
+          if (state.errorMessage.isNotEmpty) {
+            return Center(
+              child: Text('Coś poszło nie tak! : ${state.errorMessage} '),
             );
           }
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
+          if (state.isLoading) {
             return const Center(
-              child: Text("Ładowanie danych"),
+              child: CircularProgressIndicator(),
             );
           }
 
-          final documents = snapshot.data!.docs;
+          final documents = state.documents;
 
           return Column(
             children: [
@@ -56,6 +53,19 @@ class RestaurantsPageContent extends StatelessWidget {
               ],
             ],
           );
-        });
+
+          state.documents;
+          return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: FirebaseFirestore.instance
+                  .collection('restaurants')
+                  .orderBy(
+                    'rating',
+                    descending: true,
+                  )
+                  .snapshots(),
+              builder: (context, snapshot) {});
+        },
+      ),
+    );
   }
 }
