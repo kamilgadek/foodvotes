@@ -16,7 +16,7 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
           ),
         );
 
-  StreamSubscription? _steamSubscription;
+  StreamSubscription? _streamSubscription;
 
   Future<void> start() async {
     emit(
@@ -27,7 +27,7 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
       ),
     );
 
-    _steamSubscription = FirebaseFirestore.instance
+    _streamSubscription = FirebaseFirestore.instance
         .collection('restaurants')
         .orderBy(
           'rating',
@@ -52,5 +52,11 @@ class RestaurantsCubit extends Cubit<RestaurantsState> {
           ),
         );
       });
+  }
+
+  @override
+  Future<void> close() {
+    _streamSubscription?.cancel();
+    return super.close();
   }
 }

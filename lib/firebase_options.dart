@@ -26,7 +26,10 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        return ios;
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for ios - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -55,15 +58,5 @@ class DefaultFirebaseOptions {
     messagingSenderId: '6586098523',
     projectId: 'najlepszapizzawmiescier',
     storageBucket: 'najlepszapizzawmiescier.appspot.com',
-  );
-
-  static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCEZJ1gSelMvCXgopHWAWuYgF8ry_WRuEg',
-    appId: '1:6586098523:ios:c3ae19ea005f5c8e54b07e',
-    messagingSenderId: '6586098523',
-    projectId: 'najlepszapizzawmiescier',
-    storageBucket: 'najlepszapizzawmiescier.appspot.com',
-    iosClientId: '6586098523-h13vnm3fr21u6qrub38f76q2cdcg7dli.apps.googleusercontent.com',
-    iosBundleId: 'com.patrykbarszczewski.najlepszaPizzaWMiescie',
   );
 }

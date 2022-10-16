@@ -1,7 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatefulWidget {
+import '../cubit/root_cubit.dart';
+
+class LoginPage extends StatelessWidget {
   LoginPage({
     Key? key,
   }) : super(key: key);
@@ -10,98 +12,94 @@ class LoginPage extends StatefulWidget {
   final passwordController = TextEditingController();
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
-}
-
-class _LoginPageState extends State<LoginPage> {
-  var errorMessage = '';
-  var isCreatingAccount = false;
-
-  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(isCreatingAccount == true
-                  ? 'Zarejestruj się'
-                  : 'Zaloguj się'),
-              TextField(
-                decoration: const InputDecoration(hintText: 'Login'),
-                controller: widget.emailController,
-              ),
-              TextField(
-                decoration: const InputDecoration(hintText: 'Hasło'),
-                controller: widget.passwordController,
-                obscureText: true,
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Text(errorMessage),
-              const SizedBox(
-                height: 20,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  if (isCreatingAccount == true) {
-                    //rejestracja
-                    try {
-                      await FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                        email: widget.emailController.text,
-                        password: widget.passwordController.text,
-                      );
-                    } catch (error) {
-                      setState(() {
-                        errorMessage = error.toString();
-                      });
-                    }
-                  } else {
-                    //login
-                    try {
-                      await FirebaseAuth.instance.signInWithEmailAndPassword(
-                        email: widget.emailController.text,
-                        password: widget.passwordController.text,
-                      );
-                    } catch (error) {
-                      setState(() {
-                        errorMessage = error.toString();
-                      });
-                    }
-                  }
-                },
-                child: Text(isCreatingAccount == true
-                    ? 'Zarejestruj się'
-                    : 'Zaloguj się'),
-              ),
-              const SizedBox(height: 20),
-              if (isCreatingAccount == false) ...[
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      isCreatingAccount = true;
-                    });
-                  },
-                  child: const Text('Utwórz konto'),
-                )
-              ],
-              if (isCreatingAccount == true) ...[
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      isCreatingAccount = false;
-                    });
-                  },
-                  child: const Text('Masz już konto?'),
+    return BlocProvider(
+      create: (context) => RootCubit()..start(),
+      child: BlocBuilder<RootCubit, RootState>(
+        builder: (context, state) {
+          return Scaffold(
+            body: Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(state.isCreatingAccount == true
+                        ? 'Zarejestruj się'
+                        : 'Zaloguj się'),
+//Login textfield
+                    TextField(
+                      decoration: const InputDecoration(hintText: 'Login'),
+                      controller: emailController,
+                      keyboardType: TextInputType.emailAddress,
+                    ),
+//Register textfield
+                    TextField(
+                      decoration: const InputDecoration(hintText: 'Hasło'),
+                      controller: passwordController,
+                      obscureText: true,
+                    ),
+//
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(state.errorMessage),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        if (state.isCreatingAccount) {
+//Register
+                          try {
+                            context.read<RootCubit>().register(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                          } catch (error) {
+                            state.errorMessage.toString();
+                          }
+                        } else {
+//Login
+                          try {
+                            context.read<RootCubit>().signIn(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                          } catch (error) {
+                            state.errorMessage.toString();
+                          }
+                        }
+                      },
+                      child: Text(state.isCreatingAccount
+                          ? 'Zarejestruj się'
+                          : 'Zaloguj się'),
+                    ),
+                    const SizedBox(height: 20),
+                    if (state.isCreatingAccount == false) ...[
+                      TextButton(
+                        onPressed: () {
+                          context
+                              .read<RootCubit>()
+                              .createAccountButtonPressed();
+                        },
+                        child: const Text('Utwórz konto'),
+                      )
+                    ],
+                    if (state.isCreatingAccount == true) ...[
+                      TextButton(
+                        onPressed: () {
+                          context.read<RootCubit>().signInButtonPressed();
+                        },
+                        child: const Text('Masz już konto?'),
+                      ),
+                    ],
+                  ],
                 ),
-              ],
-            ],
-          ),
-        ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
