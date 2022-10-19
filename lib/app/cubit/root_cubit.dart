@@ -18,84 +18,6 @@ class RootCubit extends Cubit<RootState> {
 
   StreamSubscription? _streamSubscription;
 
-  Future<void> createAccountButtonPressed() async {
-    emit(
-      const RootState(
-        user: null,
-        isLoading: false,
-        errorMessage: '',
-        isCreatingAccount: true,
-      ),
-    );
-  }
-
-  Future<void> register({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on FirebaseAuthException catch (error) {
-      if (error.code == 'email-already-in-use') {
-        emit(
-          const RootState(
-              errorMessage: "Takie konto już istnieje! ",
-              isLoading: false,
-              user: null,
-              isCreatingAccount: false),
-        );
-      }
-    }
-  }
-
-  Future<void> signInButtonPressed() async {
-    emit(
-      const RootState(
-        user: null,
-        isLoading: false,
-        errorMessage: '',
-        isCreatingAccount: false,
-      ),
-    );
-  }
-
-  Future<void> signIn({
-    required String email,
-    required String password,
-  }) async {
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-    } on FirebaseAuthException catch (error) {
-      if (error.code == 'user-not-found') {
-        emit(
-          const RootState(
-              errorMessage: 'Nie znaloziono takiego użtkownika',
-              isLoading: false,
-              user: null,
-              isCreatingAccount: false),
-        );
-      } else if (error.code == 'wrong-password') {
-        emit(
-          const RootState(
-              errorMessage: 'Błędne hasło',
-              isLoading: false,
-              user: null,
-              isCreatingAccount: false),
-        );
-      }
-    }
-  }
-
-  Future<void> signOut() async {
-    FirebaseAuth.instance.signOut();
-  }
-
   Future<void> start() async {
     emit(
       const RootState(
@@ -108,8 +30,8 @@ class RootCubit extends Cubit<RootState> {
 
     _streamSubscription =
         FirebaseAuth.instance.authStateChanges().listen((user) {
-      emit(const RootState(
-        user: null,
+      emit(RootState(
+        user: user,
         isLoading: false,
         isCreatingAccount: false,
         errorMessage: '',
@@ -125,6 +47,76 @@ class RootCubit extends Cubit<RootState> {
               ),
             );
           });
+  }
+
+  Future<void> createAccountButtonPressed() async {
+    emit(
+      const RootState(
+        user: null,
+        isLoading: false,
+        errorMessage: '',
+        isCreatingAccount: true,
+      ),
+    );
+  }
+
+  Future<void> signInButtonPressed() async {
+    emit(
+      const RootState(
+        user: null,
+        isLoading: false,
+        errorMessage: '',
+        isCreatingAccount: false,
+      ),
+    );
+  }
+
+  Future<void> register(
+    String emailController,
+    String passwordController,
+  ) async {
+    try {
+      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: emailController,
+        password: passwordController,
+      );
+    } on FirebaseAuthException catch (error) {
+      {
+        emit(
+          RootState(
+              errorMessage: error.toString(),
+              isLoading: false,
+              user: null,
+              isCreatingAccount: false),
+        );
+      }
+    }
+  }
+
+  Future<void> signIn(
+    String emailController,
+    String passwordController,
+  ) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController,
+        password: passwordController,
+      );
+    } on FirebaseAuthException catch (error) {
+      {
+        emit(
+          RootState(
+              errorMessage: error.toString(),
+              isLoading: false,
+              user: null,
+              isCreatingAccount: false),
+        );
+      }
+    }
+  }
+
+  Future<void> signOut() async {
+    FirebaseAuth.instance.signOut();
   }
 
   @override
