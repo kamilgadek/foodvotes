@@ -50,11 +50,12 @@ class LoginPage extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () async {
                         if (state.isCreatingAccount == false) {
-//Register
+//Login
                           await context.read<RootCubit>().signIn(
                                 emailController.text,
                                 passwordController.text,
                               );
+//Register
                         } else {
                           await context.read<RootCubit>().register(
                                 emailController.text,
