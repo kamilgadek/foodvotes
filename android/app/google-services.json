@@ -29,6 +29,13 @@
             {
               "client_id": "6586098523-0djnl3q6ssampj8pot4sn3kqq104vmoi.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "6586098523-h13vnm3fr21u6qrub38f76q2cdcg7dli.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.patrykbarszczewski.najlepszaPizzaWMiescie"
+              }
             }
           ]
         }
