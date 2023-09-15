@@ -48,12 +48,7 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 20,
           ),
-          ElevatedButton(
-            onPressed: () {
-              context.read<RootCubit>().signOut();
-            },
-            child: const Text('Wyloguj się'),
-          ),
+       
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(

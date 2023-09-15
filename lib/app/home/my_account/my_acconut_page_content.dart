@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:najlepsza_pizza_w_miescie/app/cubit/root_cubit.dart';
 
 class MyAccountPageContent extends StatelessWidget {
   const MyAccountPageContent({
@@ -11,7 +13,21 @@ class MyAccountPageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text('Jesteś zalogowany jako $email'),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text('Jesteś zalogowany jako $email'),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              context.read<RootCubit>().signOut();
+            },
+            child: const Text('Wyloguj się'),
+          ),
+        ],
+      ),
     );
   }
 }
