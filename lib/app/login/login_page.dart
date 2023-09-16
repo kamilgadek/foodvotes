@@ -28,32 +28,33 @@ class LoginPage extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                child: Container(
-                  child: Padding(
-                    padding: const EdgeInsets.all(12.70),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            RichText(
-                              text: TextSpan(
-                                style: GoogleFonts.poppins(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 48,
-                                  color: Colors.white,
-                                  shadows: [
-                                    const Shadow(
-                                      offset: Offset(4.0, 4.0),
-                                      blurRadius: 2.0,
-                                      color: Colors.black,
-                                    ),
-                                  ],
-                                ),
-                                children: [
-                                  WidgetSpan(
-                                    child: Transform.translate(
-                                      offset: Offset(53, -8),
+                child: Padding(
+                  padding: const EdgeInsets.all(12.70),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RichText(
+                            text: TextSpan(
+                              style: GoogleFonts.poppins(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 48,
+                                color: Colors.white,
+                                shadows: [
+                                  const Shadow(
+                                    offset: Offset(4.0, 4.0),
+                                    blurRadius: 2.0,
+                                    color: Colors.black,
+                                  ),
+                                ],
+                              ),
+                              children: [
+                                WidgetSpan(
+                                  child: Transform.translate(
+                                    offset: const Offset(53, -8),
                                     child: Transform.rotate(
                                       angle: 33.27 / 180.0,
                                       child: Image.asset(
@@ -61,93 +62,185 @@ class LoginPage extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                ),
+                                const TextSpan(
+                                  text: 'Food Votes', // Bez litery "F"
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Color(0xFFC7DFF1),
+                                    decorationThickness: 4.0,
+                                    decorationStyle: TextDecorationStyle.solid,
+                                    fontSize:
+                                        48, // Dostosuj rozmiar czcionki do obrazka
                                   ),
-                                 const TextSpan(
-                        text: 'Food Votes', // Bez litery "F"
-                        style: TextStyle(
-                          decoration: TextDecoration.underline,
-                          decorationColor: Color(0xFFC7DFF1),
-                          decorationThickness: 4.0,
-                          decorationStyle: TextDecorationStyle.solid,
-                          fontSize: 48, // Dostosuj rozmiar czcionki do obrazka
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 80),
+                      Text(
+                        state.isCreatingAccount == true
+                            ? 'Zarejestruj się'
+                            : 'Zaloguj się',
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 24,
+                          color: Colors.white,
                         ),
                       ),
-                                ],
+                      const SizedBox(height: 20),
+                      //Login textfield
+                      TextField(
+                        decoration: InputDecoration(
+                            hintText: 'email',
+                            hintStyle: GoogleFonts.nunito(
+                              textStyle: const TextStyle(
+                                color: Colors.white,
                               ),
                             ),
-                          ],
-                        ),
-                        Text(
-                          state.isCreatingAccount == true
-                              ? 'Zarejestruj się'
-                              : 'Zaloguj się',
-                          style: GoogleFonts.poppins(
-                            fontWeight: FontWeight.w500,
-                            fontSize: 24,
-                            color: Colors.white,
+                            filled: true, 
+                            fillColor: Colors.white.withAlpha(100),
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 30.0),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            )),
+                        controller: emailController,
+                        keyboardType: TextInputType.emailAddress,
+                      ),
+                      //Register textfield
+                      const SizedBox(height: 20),
+                      TextField(
+                        decoration: InputDecoration(
+                          hintText: 'hasło',
+                          hintStyle: GoogleFonts.nunito(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                          filled: true, 
+                          fillColor: Colors.white.withAlpha(100),
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 30),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: const BorderSide(
+                              width: 10.0,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
-                        //Login textfield
-                        TextField(
-                          decoration: const InputDecoration(hintText: 'Login'),
-                          controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                        ),
-                        //Register textfield
-                        TextField(
-                          decoration: const InputDecoration(hintText: 'Hasło'),
-                          controller: passwordController,
-                          obscureText: true,
-                        ),
-                        //
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(state.errorMessage),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            if (state.isCreatingAccount == false) {
-                              //Login
-                              await context.read<RootCubit>().signIn(
-                                    emailController.text,
-                                    passwordController.text,
-                                  );
-                              //Register
-                            } else {
-                              await context.read<RootCubit>().register(
-                                    emailController.text,
-                                    passwordController.text,
-                                  );
-                            }
+                        controller: passwordController,
+                        obscureText: true,
+                      ),
+                      //
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(state.errorMessage),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                if (state.isCreatingAccount == false) {
+                                  //Login
+                                  await context.read<RootCubit>().signIn(
+                                        emailController.text,
+                                        passwordController.text,
+                                      );
+                                  //Register
+                                } else {
+                                  await context.read<RootCubit>().register(
+                                        emailController.text,
+                                        passwordController.text,
+                                      );
+                                }
+                              },
+                              child: Text(
+                                state.isCreatingAccount
+                                    ? 'Zarejestruj się'
+                                    : 'Zaloguj się',
+                                style: GoogleFonts.nunito(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white.withAlpha(100),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 60),
+                      if (state.isCreatingAccount == false) ...[
+                        TextButton(
+                          onPressed: () {
+                            context
+                                .read<RootCubit>()
+                                .createAccountButtonPressed();
                           },
-                          child: Text(state.isCreatingAccount
-                              ? 'Zarejestruj się'
-                              : 'Zaloguj się'),
-                        ),
-                        const SizedBox(height: 20),
-                        if (state.isCreatingAccount == false) ...[
-                          TextButton(
-                            onPressed: () {
-                              context
-                                  .read<RootCubit>()
-                                  .createAccountButtonPressed();
-                            },
-                            child: const Text('Utwórz konto'),
-                          )
-                        ],
-                        if (state.isCreatingAccount == true) ...[
-                          TextButton(
-                            onPressed: () {
-                              context.read<RootCubit>().signInButtonPressed();
-                            },
-                            child: const Text('Masz już konto?'),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                'Nie masz u Nas konta?',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              Text(
+                                'Zarejestruj się',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: Color(0xFFFF7269),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
+                        )
                       ],
-                    ),
+                      if (state.isCreatingAccount == true) ...[
+                        TextButton(
+                          onPressed: () {
+                            context.read<RootCubit>().signInButtonPressed();
+                          },
+                          child:  Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Masz już konto?',
+                              style: GoogleFonts.poppins(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
+                                      color: Colors.white,
+                                  ), 
+                              ),
+                              Text(
+                                'Zaloguj się',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 16,
+                                  color: Color(0xFFFF7269),
+                                ),
+                              ),
+                            ],
+                          ),
+                          
+                        ),
+                      ],
+                    ],
                   ),
                 ),
               ),
