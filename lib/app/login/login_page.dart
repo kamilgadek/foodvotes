@@ -29,10 +29,9 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(12.70),
+                  padding: EdgeInsets.all(12.70),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -64,22 +63,23 @@ class LoginPage extends StatelessWidget {
                                   ),
                                 ),
                                 const TextSpan(
-                                  text: 'Food Votes', // Bez litery "F"
-                                  style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    decorationColor: Color(0xFFC7DFF1),
-                                    decorationThickness: 4.0,
-                                    decorationStyle: TextDecorationStyle.solid,
-                                    fontSize:
-                                        48, // Dostosuj rozmiar czcionki do obrazka
-                                  ),
+                                  text: 'Food Votes',
                                 ),
                               ],
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 80),
+                      Container(
+                        width: 284.0, // Szerokość linii
+                        height: 4.0, // Grubość linii
+                        margin: const EdgeInsets.only(
+                            bottom: 50.0), // Dodaj odstęp nad i pod linią
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: const Color(0xFFC7DFF1), // Kolor linii
+                        ),
+                      ),
                       Text(
                         state.isCreatingAccount == true
                             ? 'Zarejestruj się'
@@ -100,7 +100,7 @@ class LoginPage extends StatelessWidget {
                                 color: Colors.white,
                               ),
                             ),
-                            filled: true, 
+                            filled: true,
                             fillColor: Colors.white.withAlpha(100),
                             contentPadding:
                                 const EdgeInsets.symmetric(horizontal: 30.0),
@@ -120,7 +120,7 @@ class LoginPage extends StatelessWidget {
                               color: Colors.white,
                             ),
                           ),
-                          filled: true, 
+                          filled: true,
                           fillColor: Colors.white.withAlpha(100),
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 30),
@@ -217,15 +217,16 @@ class LoginPage extends StatelessWidget {
                           onPressed: () {
                             context.read<RootCubit>().signInButtonPressed();
                           },
-                          child:  Row(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Masz już konto?',
-                              style: GoogleFonts.poppins(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                      color: Colors.white,
-                                  ), 
+                              Text(
+                                'Masz już konto?',
+                                style: GoogleFonts.poppins(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
                               Text(
                                 'Zaloguj się',
@@ -237,7 +238,6 @@ class LoginPage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          
                         ),
                       ],
                     ],
