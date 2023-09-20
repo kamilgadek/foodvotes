@@ -23,62 +23,77 @@ class LoginPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   image: DecorationImage(
                     colorFilter: ColorFilter.mode(
-                        Colors.white.withOpacity(0.8), BlendMode.dstATop),
+                      Colors.white.withOpacity(0.8),
+                      BlendMode.dstATop,
+                    ),
                     image: const AssetImage('images/tlo.png'),
                     fit: BoxFit.cover,
                   ),
                 ),
                 child: Padding(
-                  padding: EdgeInsets.all(12.70),
+                  padding: const EdgeInsets.all(20),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RichText(
-                            text: TextSpan(
-                              style: GoogleFonts.poppins(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 48,
-                                color: Colors.white,
-                                shadows: [
-                                  const Shadow(
-                                    offset: Offset(4.0, 4.0),
-                                    blurRadius: 2.0,
-                                    color: Colors.black,
-                                  ),
-                                ],
-                              ),
+                      Center(
+                        child: Stack(
+                          children: [
+                            Column(
                               children: [
-                                WidgetSpan(
-                                  child: Transform.translate(
-                                    offset: const Offset(53, -8),
-                                    child: Transform.rotate(
-                                      angle: 33.27 / 180.0,
-                                      child: Image.asset(
-                                        'images/Chef-Hat.png',
+                                Row(
+                                  children: [
+                                    RichText(
+                                      text: TextSpan(
+                                        style: GoogleFonts.poppins(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 45,
+                                          color: Colors.white,
+                                          shadows: [
+                                            const Shadow(
+                                              offset: Offset(4.0, 4.0),
+                                              blurRadius: 2.0,
+                                              color: Colors.black,
+                                            ),
+                                          ],
+                                        ),
+                                        children: [
+                                          WidgetSpan(
+                                            child: Transform.translate(
+                                              offset: const Offset(53, -8),
+                                              child: Transform.rotate(
+                                                angle: 33.27 / 180.0,
+                                                child: Image.asset(
+                                                  'images/Chef-Hat.jpg',
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          const TextSpan(
+                                            text: 'Food Votes',
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                  ),
-                                ),
-                                const TextSpan(
-                                  text: 'Food Votes',
+                                  ],
                                 ),
                               ],
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                       Container(
-                        width: 284.0, // Szerokość linii
-                        height: 4.0, // Grubość linii
+                        width: 290.0,
+                        height: 4.0,
                         margin: const EdgeInsets.only(
-                            bottom: 50.0), // Dodaj odstęp nad i pod linią
+                          bottom: 10.0,
+                        ),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.0),
-                          color: const Color(0xFFC7DFF1), // Kolor linii
+                          color: const Color(0xFFC7DFF1),
                         ),
+                      ),
+                      const SizedBox(
+                        height: 30,
                       ),
                       Text(
                         state.isCreatingAccount == true
@@ -90,23 +105,26 @@ class LoginPage extends StatelessWidget {
                           color: Colors.white,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(
+                        height: 40,
+                      ),
                       //Login textfield
                       TextField(
                         decoration: InputDecoration(
-                            hintText: 'email',
-                            hintStyle: GoogleFonts.nunito(
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                              ),
+                          hintText: 'email',
+                          hintStyle: GoogleFonts.nunito(
+                            textStyle: const TextStyle(
+                              color: Colors.white,
                             ),
-                            filled: true,
-                            fillColor: Colors.white.withAlpha(100),
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 30.0),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            )),
+                          ),
+                          filled: true,
+                          fillColor: Colors.white.withAlpha(50),
+                          contentPadding:
+                              const EdgeInsets.symmetric(horizontal: 30.0),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
                       ),
@@ -121,7 +139,7 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           filled: true,
-                          fillColor: Colors.white.withAlpha(100),
+                          fillColor: Colors.white.withAlpha(50),
                           contentPadding:
                               const EdgeInsets.symmetric(horizontal: 30),
                           border: OutlineInputBorder(
@@ -135,13 +153,9 @@ class LoginPage extends StatelessWidget {
                         controller: passwordController,
                         obscureText: true,
                       ),
-                      //
-                      const SizedBox(
-                        height: 20,
-                      ),
                       Text(state.errorMessage),
                       const SizedBox(
-                        height: 20,
+                        height: 30,
                       ),
                       Row(
                         children: [
@@ -172,7 +186,8 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.white.withAlpha(100),
+                                minimumSize: const Size.fromHeight(54),
+                                backgroundColor: Colors.white.withAlpha(50),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -181,7 +196,6 @@ class LoginPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      const SizedBox(height: 60),
                       if (state.isCreatingAccount == false) ...[
                         TextButton(
                           onPressed: () {
@@ -205,12 +219,12 @@ class LoginPage extends StatelessWidget {
                                 style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16,
-                                  color: Color(0xFFFF7269),
+                                  color: const Color(0xFFFF7269),
                                 ),
                               ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                       if (state.isCreatingAccount == true) ...[
                         TextButton(
@@ -233,7 +247,7 @@ class LoginPage extends StatelessWidget {
                                 style: GoogleFonts.poppins(
                                   fontWeight: FontWeight.w700,
                                   fontSize: 16,
-                                  color: Color(0xFFFF7269),
+                                  color: const Color(0xFFFF7269),
                                 ),
                               ),
                             ],
