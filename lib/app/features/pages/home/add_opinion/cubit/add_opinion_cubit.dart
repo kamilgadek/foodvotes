@@ -1,10 +1,8 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:meta/meta.dart';
 
-import '../add_opinion_page_content.dart';
 
 part 'add_opinion_state.dart';
 
